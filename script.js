@@ -2,15 +2,30 @@
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 // Access Key: a62c7d10877c661b208fffa0f58b2658
 
-var apiUrl = 'http://api.openweathermap.org/'
+// var apiUrl = 'http://api.openweathermap.org/'
 
-fetch(apiUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
+// current and future conditions for that city and that city is added to the search history
+var searchInputEl = document.querySelector('.search-bar')
+var searchButtonEl = document.querySelector('.search-button')
+
+function citySearch() {
+
+    searchButtonEl.addEventListener('click', function () {
+        
+        console.log('worked')
+    });
+}
+
+
+// fetch(apiUrl)
+//   .then(function (response) {
+//     return response.json();
+//   })
+//   .then(function (data) {
+//     console.log(data);
+//   })
+//   .catch(function (err) {
+//     console.log(err);
+//   });
+
+citySearch();
