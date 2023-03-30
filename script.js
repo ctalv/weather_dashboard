@@ -140,10 +140,16 @@ var displayDailyWeather = function (data) {
     var windEl = createElement('li')
     
     iconEl.classList.add('icon');
-    var iEl.createElement('i');
+    var iEl = createElement('i');
     iEl.classList.add('fas fa-'+icon);
 
-    
+    dailyDivEl.appendChild(cityNameEl);
+    dailyDivEl.appendChild(dateEl);
+    dailyDivEl.appendChild(iconEl);
+    dailyDivEl.appendChild(olEl);
+    olEl.appendChild(tempEl);
+    olEl.appendChild(humidityEl);
+    olEl.appendChild(windEl);
 
 }
 
