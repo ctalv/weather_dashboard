@@ -10,6 +10,8 @@ console.log(document.location.search)
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
 var cityBtnEl = document.querySelector('#city-buttons')
+var dailyDivEl = document.querySelector('.daily')
+var forecastDivEl = document.querySelector('.forecast')
 
 
 if ((localStorage.getItem('cityListStored') === null)) {
@@ -63,15 +65,21 @@ var buttonClickHandler = function (event) {
     var cityBtnName = event.target.textContent;
 
     console.log(cityBtnName)
-
     getCityLatLon(cityBtnName)
 
   };
 
+var removeHTML = function () {
+console.log('remove')
+dailyDivEl.textContent = ''
+forecastDivEl.textContent = ''
+}
 
 var getCityLatLon = function (cityName) {
 
     var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=a62c7d10877c661b208fffa0f58b2658';
+
+    removeHTML()
 
     fetch(apiZip)
         .then(function (response) {
@@ -164,7 +172,6 @@ var displayDailyWeather = function (data) {
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
-    var dailyDivEl = document.querySelector('.daily')
 
     var h3El = document.createElement('h3');
     var olEl = document.createElement('ol');
@@ -211,8 +218,6 @@ var displayForecast = function (data) {
         var tempF = Math.round(((tempK - 273.15) * (9 / 5)) + 32);
         var humidity = weather.humidity;
         var windSpeed = (data.list[i].wind.speed)
-
-        var forecastDivEl = document.querySelector('.forecast')
 
         var h3El = document.createElement('h3');
         var olEl = document.createElement('ol');
