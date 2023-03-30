@@ -128,6 +128,21 @@ var displayDailyWeather = function (data) {
     console.log(tempF)
     console.log(humidity)
     console.log(windSpeed)
+
+    var dailyDivEl = document.querySelector('.daily')
+
+    var cityNameEl = createElement('h2'); 
+    var dateEl = createElement('h3'); 
+    var iconEl = createElement('span'); 
+    var olEl = createElement('ol')
+    var tempEl = createElement('li'); 
+    var humidityEl = createElement('li'); 
+    var windEl = createElement('li')
+    
+    iconEl.classList.add('icon');
+    var iEl.createElement('i');
+    iEl.classList.add('fas fa-'+icon);
+
     
 
 }
