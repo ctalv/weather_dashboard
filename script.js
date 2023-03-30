@@ -102,7 +102,7 @@ var getWeather = function (lat, lon) {
 }
 
 var saveCity = function (cityName) {
-    
+
     cityList.push(cityName)
 
     window.localStorage.setItem('cityNameStored', cityName)
@@ -112,14 +112,14 @@ var saveCity = function (cityName) {
 
 // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 var displayDailyWeather = function (data) {
-    
+
     var cityName = data.city.name
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
     var iconCode = data.list[0].weather[0].icon
     var weather = data.list[0].main
     var tempK = weather.temp
-    var tempF = Math.round(((tempK-273.15)*(9/5))+32);
+    var tempF = Math.round(((tempK - 273.15) * (9 / 5)) + 32);
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
@@ -127,24 +127,24 @@ var displayDailyWeather = function (data) {
 
     var h2El = document.createElement('h2');
     var olEl = document.createElement('ol');
-    var tempEl = document.createElement('li'); 
-    var humidityEl = document.createElement('li'); 
+    var tempEl = document.createElement('li');
+    var humidityEl = document.createElement('li');
     var windEl = document.createElement('li')
-    
+
     // icon stuff
-    var iconEl = document.createElement('img'); 
+    var iconEl = document.createElement('img');
     var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
-    iconEl.setAttribute('id','wicon')
-    iconEl.setAttribute('src',iconSrc)
-    iconEl.setAttribute('alt','weather icon')
+    iconEl.setAttribute('id', 'wicon')
+    iconEl.setAttribute('src', iconSrc)
+    iconEl.setAttribute('alt', 'weather icon')
 
 
-    h2El.textContent =  cityName + ' ' + day 
+    h2El.textContent = cityName + ' ' + day
     tempEl.textContent = tempF + ' F';
     humidityEl.textContent = humidity + '%';
     windEl.textContent = windSpeed + ' mps';
 
-    
+
     dailyDivEl.appendChild(h2El);
     dailyDivEl.appendChild(iconEl);
     dailyDivEl.appendChild(olEl);
@@ -160,47 +160,48 @@ var displayForecast = function (data) {
     console.log(data)
 
     var cityName = data.city.name
- for (i = 1; i < data.list.length; i = i+8) {
 
-    var unixDay = data.list[i].dt
-    var day = dayjs.unix(unixDay).format('MM-DD-YY');
-    var iconCode = data.list[i].weather[0].icon
-    var weather = data.list[i].main
-    var tempK = weather.temp
-    var tempF = Math.round(((tempK-273.15)*(9/5))+32);
-    var humidity = weather.humidity;
-    var windSpeed = (data.list[i].wind.speed)
+    for (i = 1; i < data.list.length; i = i + 8) {
 
-    var dailyDivEl = document.querySelector('.daily')
+        var unixDay = data.list[i].dt
+        var day = dayjs.unix(unixDay).format('MM-DD-YY');
+        var iconCode = data.list[i].weather[0].icon
+        var weather = data.list[i].main
+        var tempK = weather.temp
+        var tempF = Math.round(((tempK - 273.15) * (9 / 5)) + 32);
+        var humidity = weather.humidity;
+        var windSpeed = (data.list[i].wind.speed)
 
-    var h2El = document.createElement('h2');
-    var olEl = document.createElement('ol');
-    var tempEl = document.createElement('li'); 
-    var humidityEl = document.createElement('li'); 
-    var windEl = document.createElement('li')
-    
-    // icon stuff
-    var iconEl = document.createElement('img'); 
-    var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
-    iconEl.setAttribute('id','wicon')
-    iconEl.setAttribute('src',iconSrc)
-    iconEl.setAttribute('alt','weather icon')
+        var forecastDivEl = document.querySelector('.forecast')
+
+        var h2El = document.createElement('h2');
+        var olEl = document.createElement('ol');
+        var tempEl = document.createElement('li');
+        var humidityEl = document.createElement('li');
+        var windEl = document.createElement('li')
+
+        // icon stuff
+        var iconEl = document.createElement('img');
+        var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
+        iconEl.setAttribute('id', 'wicon')
+        iconEl.setAttribute('src', iconSrc)
+        iconEl.setAttribute('alt', 'weather icon')
 
 
-    h2El.textContent =  cityName + ' ' + day 
-    tempEl.textContent = tempF + ' F';
-    humidityEl.textContent = humidity + '%';
-    windEl.textContent = windSpeed + ' mps';
+        h2El.textContent = cityName + ' ' + day
+        tempEl.textContent = tempF + ' F';
+        humidityEl.textContent = humidity + '%';
+        windEl.textContent = windSpeed + ' mps';
 
-    
-    dailyDivEl.appendChild(h2El);
-    dailyDivEl.appendChild(iconEl);
-    dailyDivEl.appendChild(olEl);
-    olEl.appendChild(tempEl);
-    olEl.appendChild(humidityEl);
-    olEl.appendChild(windEl);
 
-}
+        forecastDivEl.appendChild(h2El);
+        forecastDivEl.appendChild(iconEl);
+        forecastDivEl.appendChild(olEl);
+        olEl.appendChild(tempEl);
+        olEl.appendChild(humidityEl);
+        olEl.appendChild(windEl);
+
+    }
 
 }
 
