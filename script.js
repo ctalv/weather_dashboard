@@ -272,4 +272,13 @@ var displayForecast = function (data) {
 
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
+searchInputEl.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault()
+console.log("enter")
+searchButtonEl.click();
+    
+
+    }
+  });
 cityBtnEl.addEventListener('click', buttonClickHandler);
