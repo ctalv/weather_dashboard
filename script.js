@@ -103,12 +103,33 @@ var getWeather = function (lat, lon) {
 
 var saveCity = function (cityName) {
 
-    cityList.push(cityName)
+    var inList = [];
 
-    window.localStorage.setItem('cityNameStored', cityName)
-    window.localStorage.setItem('cityListStored', cityList)
+    for (i = 0; i < cityList.length; i++) {
+
+        if (cityName === cityList[i]) {
+            console.log('already in list')
+            inList++
+            console.log(inList)
+        }
+
+    }
+
+    console.log(inList)
+    if (inList === 1) {
+console.log(inList)
+    } else {
+        console.log('yes')
+        cityList.push(cityName)
+
+        window.localStorage.setItem('cityNameStored', cityName)
+        window.localStorage.setItem('cityListStored', cityList)
+    }
+    console.log(cityList)
 
 }
+
+
 
 // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 var displayDailyWeather = function (data) {
