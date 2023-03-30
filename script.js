@@ -172,6 +172,7 @@ var displayDailyWeather = function (data) {
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
+    var divEl = document.createElement('div')
     var h2El = document.createElement('h2')
     var h3El = document.createElement('h3');
     var olEl = document.createElement('ol');
@@ -186,6 +187,7 @@ var displayDailyWeather = function (data) {
     iconEl.setAttribute('src', iconSrc)
     iconEl.setAttribute('alt', 'weather icon')
 
+    h2El.setAttribute('class','title is-2')
 
     h2El.textContent = 'Today\'s Forecast'
     h3El.textContent = cityName + ' ' + day
@@ -193,10 +195,13 @@ var displayDailyWeather = function (data) {
     humidityEl.textContent = humidity + '%';
     windEl.textContent = windSpeed + ' mps';
 
+    
+
     dailyDivEl.appendChild(h2El);
-    dailyDivEl.appendChild(h3El);
-    dailyDivEl.appendChild(iconEl);
-    dailyDivEl.appendChild(olEl);
+    dailyDivEl.appendChild(divEl);
+    divEl.appendChild(h3El);
+    divEl.appendChild(iconEl);
+    divEl.appendChild(olEl);
     olEl.appendChild(tempEl);
     olEl.appendChild(humidityEl);
     olEl.appendChild(windEl);
@@ -209,6 +214,7 @@ var displayForecast = function (data) {
     console.log(data)
     var h2El = document.createElement('h2')
     h2El.textContent = '5 Day Forecast'
+    h2El.setAttribute('class','title is-2')
     forecastDivEl.appendChild(h2El)
 
     for (i = 1; i < data.list.length; i = i + 8) {
@@ -222,7 +228,7 @@ var displayForecast = function (data) {
         var humidity = weather.humidity;
         var windSpeed = (data.list[i].wind.speed)
 
-        
+        var divEl = document.createElement('div')
         var h3El = document.createElement('h3');
         var olEl = document.createElement('ol');
         var tempEl = document.createElement('li');
@@ -243,9 +249,10 @@ var displayForecast = function (data) {
         windEl.textContent = windSpeed + ' mps';
 
         
-        forecastDivEl.appendChild(h3El);
-        forecastDivEl.appendChild(iconEl);
-        forecastDivEl.appendChild(olEl);
+        forecastDivEl.appendChild(divEl);
+        divEl.appendChild(h3El);
+        divEl.appendChild(iconEl);
+        divEl.appendChild(olEl);
         olEl.appendChild(tempEl);
         olEl.appendChild(humidityEl);
         olEl.appendChild(windEl);
