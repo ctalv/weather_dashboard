@@ -115,13 +115,20 @@ var displayDailyWeather = function (data) {
     var cityName = data.city.name
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
+    var icon = data.list[0].weather[0].icon
     var weather = data.list[0].main
     var tempK = weather.temp
     var tempF = Math.round(((tempK-273.15)*(9/5))+32);
+    var humidity = weather.humidity;
+    var windSpeed = Math.round((data.list[0].wind.speed)/60)
 
     console.log(cityName)
     console.log(day)
+    console.log(icon)
     console.log(tempF)
+    console.log(humidity)
+    console.log(windSpeed)
+    
 
 }
 
