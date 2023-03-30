@@ -18,6 +18,7 @@ var formSubmitHandler = function (event) {
 
     if (city) {
         getCityLatLon(city);
+        saveCity(city);
     } else {
         console.log('enter city')
     }
@@ -38,7 +39,7 @@ var getCityLatLon = function (cityName) {
                     var lat = data[0].lat
                     var lon = data[0].lon
                     var cityName = data[0].name
-                    
+
                     getWeather(lat, lon)
                 });
             } else {
@@ -56,23 +57,27 @@ var getWeather = function (lat, lon) {
     console.log(apiLatLon)
 
     fetch(apiLatLon)
-    .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-                
-                var unixDay = data.list[0].dt
-                console.log(unixDay)
-                var day = dayjs.unix(unixDay).format('MMM D, YYYY');
-                console.log(day)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
 
-            });
-        } else {
-            console.log('dne');
-        }
+                    var unixDay = data.list[0].dt
+                    console.log(unixDay)
+                    var day = dayjs.unix(unixDay).format('MMM D, YYYY');
+                    console.log(day)
 
-    })
+                });
+            } else {
+                console.log('dne');
+            }
+
+        })
 }
 
+var saveCity = function (cityName) {
+    console.log(cityName)
+    
+}
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
