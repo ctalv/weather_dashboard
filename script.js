@@ -160,16 +160,16 @@ var displayForecast = function (data) {
     console.log(data)
 
     var cityName = data.city.name
- for (i = 1; i <= 5; i++) {
+ for (i = 1; i < data.list.length; i = i+8) {
 
-    var unixDay = data.list[0].dt
+    var unixDay = data.list[i].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
-    var iconCode = data.list[0].weather[0].icon
-    var weather = data.list[0].main
+    var iconCode = data.list[i].weather[0].icon
+    var weather = data.list[i].main
     var tempK = weather.temp
     var tempF = Math.round(((tempK-273.15)*(9/5))+32);
     var humidity = weather.humidity;
-    var windSpeed = (data.list[0].wind.speed)
+    var windSpeed = (data.list[i].wind.speed)
 
     var dailyDivEl = document.querySelector('.daily')
 
