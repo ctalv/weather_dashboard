@@ -71,7 +71,7 @@ var getCityLatLon = function (cityName) {
                     var cityName = data[0].name
 
                     getWeather(lat, lon)
-                    addCityToList(cityName)
+                    compareList(cityName)
                 });
             } else {
                 console.log('dne');
@@ -117,23 +117,23 @@ var compareList = function (cityName) {
 
     console.log(inList)
     if (inList === 1) {
-console.log(inList)
+        console.log(inList)
     } else {
         console.log('yes')
-saveCity(cityName)
+        saveCity(cityName)
+        addCityToList(cityName)
     }
-    console.log(cityList)
+    
 }
 
 
 var saveCity = function (cityName) {
 
-        cityList.push(cityName)
+    cityList.push(cityName)
 
-        window.localStorage.setItem('cityNameStored', cityName)
-        window.localStorage.setItem('cityListStored', cityList)
+    window.localStorage.setItem('cityNameStored', cityName)
+    window.localStorage.setItem('cityListStored', cityList)
 
-    console.log(cityList)
 
 }
 
