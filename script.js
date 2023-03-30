@@ -40,10 +40,7 @@ function addCityToList(cityName) {
     btnEl.classList.add('button');
     cityBtnEl.appendChild(btnEl);
     
-
-
 }
-
 
 
 var formSubmitHandler = function (event) {
@@ -67,6 +64,7 @@ var buttonClickHandler = function (event) {
 
     console.log(cityBtnName)
 
+    getCityLatLon(cityBtnName)
 
   };
 
