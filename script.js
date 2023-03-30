@@ -143,7 +143,10 @@ var displayDailyWeather = function (data) {
     // iconEl.classList.add('icon');
     var iconEl = document.createElement('img'); 
     var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
-    iconEl.setAttribute(id="wicon", src=iconSrc, alt="weather icon")
+    iconEl.setAttribute('id','wicon')
+    iconEl.setAttribute('src',iconSrc)
+    iconEl.setAttribute('alt','weather icon')
+    // (id="wicon" src = iconSrc alt="weather icon")
 
     // cityNameEl.textContent = cityName;
     // dateEl.textContent = day;
