@@ -49,6 +49,7 @@ var formSubmitHandler = function (event) {
 
     event.preventDefault();
     var city = searchInputEl.value
+    searchInputEl.value = '';
 
     if (city) {
         console.log(city)
@@ -186,6 +187,7 @@ var displayDailyWeather = function (data) {
     iconEl.setAttribute('alt', 'weather icon')
 
     olEl.setAttribute("style","list-style-type:none")
+    divEl.setAttribute('class', 'content is-medium')
 
     h2El.setAttribute('class','title is-2 hero')
 
@@ -219,7 +221,7 @@ var displayForecast = function (data) {
 
     var divMainEl = document.createElement('div')
     forecastDivEl.appendChild(divMainEl)
-    divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between')
+    divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between content is-medium')
 
     for (i = 1; i < data.list.length; i = i + 8) {
 
