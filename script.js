@@ -154,9 +154,51 @@ var displayDailyWeather = function (data) {
 
 }
 
-
+//  5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 var displayForecast = function (data) {
-console.log("worked")
+
+    console.log(data)
+    var cityName = data.city.name
+    var unixDay = data.list[0].dt
+    var day = dayjs.unix(unixDay).format('MM-DD-YY');
+    var iconCode = data.list[0].weather[0].icon
+    var weather = data.list[0].main
+    var tempK = weather.temp
+    var tempF = Math.round(((tempK-273.15)*(9/5))+32);
+    var humidity = weather.humidity;
+    var windSpeed = (data.list[0].wind.speed)
+
+    var dailyDivEl = document.querySelector('.daily')
+
+    var h2El = document.createElement('h2');
+    var olEl = document.createElement('ol');
+    var tempEl = document.createElement('li'); 
+    var humidityEl = document.createElement('li'); 
+    var windEl = document.createElement('li')
+    
+    // icon stuff
+    var iconEl = document.createElement('img'); 
+    var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
+    iconEl.setAttribute('id','wicon')
+    iconEl.setAttribute('src',iconSrc)
+    iconEl.setAttribute('alt','weather icon')
+
+
+    h2El.textContent =  cityName + ' ' + day 
+    tempEl.textContent = tempF + ' F';
+    humidityEl.textContent = humidity + '%';
+    windEl.textContent = windSpeed + ' mps';
+
+    
+    dailyDivEl.appendChild(h2El);
+    dailyDivEl.appendChild(iconEl);
+    dailyDivEl.appendChild(olEl);
+    olEl.appendChild(tempEl);
+    olEl.appendChild(humidityEl);
+    olEl.appendChild(windEl);
+
+
+
 }
 
 
