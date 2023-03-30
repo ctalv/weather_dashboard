@@ -216,7 +216,7 @@ var displayForecast = function (data) {
 
     var divMainEl = document.createElement('div')
     forecastDivEl.appendChild(divMainEl)
-    divMainEl.setAttribute('class', 'is-flex')
+    divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between')
 
     for (i = 1; i < data.list.length; i = i + 8) {
 
