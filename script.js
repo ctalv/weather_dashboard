@@ -102,7 +102,7 @@ var getWeather = function (lat, lon) {
 }
 
 var saveCity = function (cityName) {
-    console.log(cityName)
+    
     cityList.push(cityName)
 
     window.localStorage.setItem('cityNameStored', cityName)
@@ -112,7 +112,7 @@ var saveCity = function (cityName) {
 
 // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 var displayDailyWeather = function (data) {
-    console.log(data)
+    
     var cityName = data.city.name
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
@@ -158,7 +158,10 @@ var displayDailyWeather = function (data) {
 var displayForecast = function (data) {
 
     console.log(data)
+
     var cityName = data.city.name
+ for (i = 1; i <= 5; i++) {
+
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
     var iconCode = data.list[0].weather[0].icon
@@ -197,7 +200,7 @@ var displayForecast = function (data) {
     olEl.appendChild(humidityEl);
     olEl.appendChild(windEl);
 
-
+}
 
 }
 
