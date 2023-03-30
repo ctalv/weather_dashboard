@@ -5,43 +5,52 @@
 // var apiUrl = 'http://api.openweathermap.org/'
 
 // current and future conditions for that city and that city is added to the search history
+console.log(document.location.search)
+
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
 
-function citySearch() {
 
-    searchButtonEl.addEventListener('click', function () {
+var formSubmitHandler = function (event) {
 
-        var city = searchInputEl.value
-        
+    event.preventDefault();
+    var city = searchInputEl.value
 
-        if (city === '') {
-            console.log('nothing entered')
-            console.log(searchInputEl.textContent)
+    if (city) {
+        getCityLatLon(city);
+    } else {
+        console.log('enter city')
+    }
 
-        } else {
+};
 
-            var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
-            console.log(apiZip)
 
-            fetch(apiZip)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
+var getCityLatLon = function (cityName) {
+
+    var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=a62c7d10877c661b208fffa0f58b2658';
+
+
+
+    fetch(apiZip)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
                     console.log(data);
-                })
-                .catch(function (err) {
-                    console.log(err);
                 });
+            } else {
+                console.log('dne');
+            }
 
-            console.log('worked')
-        }
-    });
-
+        })
 }
 
+
+
+var getWeather = function () {
+    var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
+    console.log(apiLatLon)
+}
 
 // fetch(apiUrl)
 //   .then(function (response) {
@@ -54,4 +63,4 @@ function citySearch() {
 //     console.log(err);
 //   });
 
-citySearch();
+searchButtonEl.addEventListener('click', formSubmitHandler);
