@@ -9,7 +9,9 @@ console.log(document.location.search)
 
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
-var listParentEl = document.querySelector('.list-parent')
+// var listParentEl = document.querySelector('.list-parent')
+var cityBtnEl = document.querySelector('#city-buttons')
+
 
 if ((localStorage.getItem('cityListStored') === null)) {
     var cityList = [];
@@ -27,7 +29,8 @@ function createCityListButtons() {
         var btnEl = document.createElement('button');
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
-        listParentEl.appendChild(btnEl);
+        cityBtnEl.appendChild(btnEl);
+        btnEl.addEventListener('click', buttonClickHandler);
 
     }
 }
@@ -36,10 +39,13 @@ function addCityToList(cityName) {
     var btnEl = document.createElement('button');
     btnEl.textContent = cityName;
     btnEl.classList.add('button');
-    listParentEl.appendChild(btnEl);
+    cityBtnEl.appendChild(btnEl);
+    // var cityBtnEl = 
 
 
 }
+
+
 
 var formSubmitHandler = function (event) {
 
@@ -55,6 +61,20 @@ var formSubmitHandler = function (event) {
 
 };
 
+
+
+var buttonClickHandler = function (event) {
+    var cityBtnEl = event.target.textContent;
+
+    console.log(cityBtnEl)
+    console.log('yes')
+  
+    // if (language) {
+    //   getFeaturedRepos(language);
+  
+    //   repoContainerEl.textContent = '';
+    // }
+  };
 
 
 var getCityLatLon = function (cityName) {
@@ -232,4 +252,7 @@ var displayForecast = function (data) {
 }
 
 
+
+
 searchButtonEl.addEventListener('click', formSubmitHandler);
+cityBtnEl.addEventListener('click', buttonClickHandler);
