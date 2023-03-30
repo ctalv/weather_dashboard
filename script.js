@@ -9,6 +9,7 @@ console.log(document.location.search)
 
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
+var listParentEl = document.querySelector('.list-parent')
 
 if ((localStorage.getItem('cityListStored') === null)) {
     var cityList = [];
@@ -17,8 +18,17 @@ if ((localStorage.getItem('cityListStored') === null)) {
     cityList = cityList.split(',')
     console.log(cityList)
     console.log(typeof cityList)
+    createCityLIstButtons()
 }
 
+function createCityLIstButtons () {
+
+    for (i = 0; i < cityList.length; i++) {
+        var btnEl =  document.createElement('button')
+        listParentEl.appendChild(btnEl)
+
+    }
+}
 
 var formSubmitHandler = function (event) {
 
