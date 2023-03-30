@@ -187,7 +187,7 @@ var displayDailyWeather = function (data) {
     iconEl.setAttribute('src', iconSrc)
     iconEl.setAttribute('alt', 'weather icon')
 
-    h2El.setAttribute('class','title is-2')
+    h2El.setAttribute('class','title is-2 hero')
 
     h2El.textContent = 'Today\'s Forecast'
     h3El.textContent = cityName + ' ' + day
@@ -214,8 +214,12 @@ var displayForecast = function (data) {
     console.log(data)
     var h2El = document.createElement('h2')
     h2El.textContent = '5 Day Forecast'
-    h2El.setAttribute('class','title is-2')
+    h2El.setAttribute('class','title is-2 hero')
     forecastDivEl.appendChild(h2El)
+
+    var divMainEl = document.createElement('div')
+    forecastDivEl.appendChild(divMainEl)
+    divMainEl.setAttribute('class', 'is-flex')
 
     for (i = 1; i < data.list.length; i = i + 8) {
 
@@ -242,6 +246,7 @@ var displayForecast = function (data) {
         iconEl.setAttribute('src', iconSrc)
         iconEl.setAttribute('alt', 'weather icon')
 
+
         
         h3El.textContent = day
         tempEl.textContent = tempF + ' F';
@@ -249,7 +254,7 @@ var displayForecast = function (data) {
         windEl.textContent = windSpeed + ' mps';
 
         
-        forecastDivEl.appendChild(divEl);
+        divMainEl.appendChild(divEl);
         divEl.appendChild(h3El);
         divEl.appendChild(iconEl);
         divEl.appendChild(olEl);
