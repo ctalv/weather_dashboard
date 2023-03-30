@@ -115,7 +115,7 @@ var displayDailyWeather = function (data) {
     var cityName = data.city.name
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
-    var icon = data.list[0].weather[0].icon
+    var iconCode = data.list[0].weather[0].icon
     var weather = data.list[0].main
     var tempK = weather.temp
     var tempF = Math.round(((tempK-273.15)*(9/5))+32);
@@ -124,35 +124,37 @@ var displayDailyWeather = function (data) {
 
     console.log(cityName)
     console.log(day)
-    console.log(icon)
+    // console.log(icon)
     console.log(tempF)
     console.log(humidity)
     console.log(windSpeed)
 
     var dailyDivEl = document.querySelector('.daily')
 
-    var cityNameEl = createElement('h2'); 
-    var dateEl = createElement('h3'); 
-    var iconEl = createElement('span'); 
-    var olEl = createElement('ol')
-    var tempEl = createElement('li'); 
-    var humidityEl = createElement('li'); 
-    var windEl = createElement('li')
+    // var cityNameEl = document.createElement('h2'); 
+    var h2El = document.createElement('h2')
+    // var dateEl = document.createElement('h3'); 
+    // var iconEl = document.createElement('span'); 
+    var olEl = document.createElement('ol')
+    var tempEl = document.createElement('li'); 
+    var humidityEl = document.createElement('li'); 
+    var windEl = document.createElement('li')
     
-    iconEl.classList.add('icon');
-    var iEl = createElement('i');
-    iEl.classList.add('fas fa-'+icon);
+    // iconEl.classList.add('icon');
+    var iconPic = 'http://openweathermap.org/img/w/' + iconCode + '.png'
 
-
-    cityNameEl.textContent = cityName;
-    dateEl.textContent = day;
+    // cityNameEl.textContent = cityName;
+    // dateEl.textContent = day;
+    // iconEl.value = iconPic;
+    h2El.textContent =  cityName + ' ' + day + ' ' + iconPic;
     tempEl.textContent = tempF + ' F';
     humidityEl.textContent = humidity + '%';
-    windEl.textContent = windSpeed + 'mps';
+    windEl.textContent = windSpeed + ' mps';
 
-    dailyDivEl.appendChild(cityNameEl);
-    dailyDivEl.appendChild(dateEl);
-    dailyDivEl.appendChild(iconEl);
+    // dailyDivEl.appendChild(cityNameEl);
+    // dailyDivEl.appendChild(dateEl);
+    // dailyDivEl.appendChild(iconEl);
+    dailyDivEl.appendChild(h2El);
     dailyDivEl.appendChild(olEl);
     olEl.appendChild(tempEl);
     olEl.appendChild(humidityEl);
