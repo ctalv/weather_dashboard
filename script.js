@@ -109,13 +109,19 @@ var saveCity = function (cityName) {
 
 }
 
+// city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 var displayDailyWeather = function (data) {
     console.log(data)
-    var unixDay = data.list[0].dt
-    var day = dayjs.unix(unixDay).format('MMM D, YYYY');
     var cityName = data.city.name
-    console.log(day)
+    var unixDay = data.list[0].dt
+    var day = dayjs.unix(unixDay).format('MM-DD-YY');
+    var weather = data.list[0].main
+    var tempK = weather.temp
+    var tempF = Math.round(((tempK-273.15)*(9/5))+32);
+
     console.log(cityName)
+    console.log(day)
+    console.log(tempF)
 
 }
 
