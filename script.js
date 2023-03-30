@@ -21,6 +21,7 @@ if ((localStorage.getItem('cityListStored') === null)) {
     createCityListButtons()
 }
 
+
 function createCityListButtons() {
     for (i = 0; i < cityList.length; i++) {
         var btnEl = document.createElement('button');
@@ -47,7 +48,7 @@ var formSubmitHandler = function (event) {
 
     if (city) {
         getCityLatLon(city);
-        saveCity(city);
+        compareList(city);
     } else {
         console.log('enter city')
     }
@@ -101,8 +102,7 @@ var getWeather = function (lat, lon) {
         })
 }
 
-var saveCity = function (cityName) {
-
+var compareList = function (cityName) {
     var inList = [];
 
     for (i = 0; i < cityList.length; i++) {
@@ -120,11 +120,19 @@ var saveCity = function (cityName) {
 console.log(inList)
     } else {
         console.log('yes')
+saveCity(cityName)
+    }
+    console.log(cityList)
+}
+
+
+var saveCity = function (cityName) {
+
         cityList.push(cityName)
 
         window.localStorage.setItem('cityNameStored', cityName)
         window.localStorage.setItem('cityListStored', cityList)
-    }
+
     console.log(cityList)
 
 }
