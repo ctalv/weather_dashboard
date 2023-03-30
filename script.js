@@ -9,7 +9,10 @@ console.log(document.location.search)
 
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
-var listParentEl = document.querySelector('.list-parent')
+var cityBtnEl = document.querySelector('#city-buttons')
+var dailyDivEl = document.querySelector('.daily')
+var forecastDivEl = document.querySelector('.forecast')
+
 
 if ((localStorage.getItem('cityListStored') === null)) {
     var cityList = [];
@@ -21,12 +24,14 @@ if ((localStorage.getItem('cityListStored') === null)) {
     createCityListButtons()
 }
 
+
 function createCityListButtons() {
     for (i = 0; i < cityList.length; i++) {
         var btnEl = document.createElement('button');
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
-        listParentEl.appendChild(btnEl);
+        cityBtnEl.appendChild(btnEl);
+        btnEl.addEventListener('click', buttonClickHandler);
 
     }
 }
@@ -35,10 +40,10 @@ function addCityToList(cityName) {
     var btnEl = document.createElement('button');
     btnEl.textContent = cityName;
     btnEl.classList.add('button');
-    listParentEl.appendChild(btnEl);
-
-
+    cityBtnEl.appendChild(btnEl);
+    
 }
+
 
 var formSubmitHandler = function (event) {
 
@@ -47,7 +52,7 @@ var formSubmitHandler = function (event) {
 
     if (city) {
         getCityLatLon(city);
-        saveCity(city);
+        compareList(city);
     } else {
         console.log('enter city')
     }
@@ -56,9 +61,25 @@ var formSubmitHandler = function (event) {
 
 
 
+var buttonClickHandler = function (event) {
+    var cityBtnName = event.target.textContent;
+
+    console.log(cityBtnName)
+    getCityLatLon(cityBtnName)
+
+  };
+
+var removeHTML = function () {
+console.log('remove')
+dailyDivEl.textContent = ''
+forecastDivEl.textContent = ''
+}
+
 var getCityLatLon = function (cityName) {
 
     var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=a62c7d10877c661b208fffa0f58b2658';
+
+    removeHTML()
 
     fetch(apiZip)
         .then(function (response) {
@@ -70,7 +91,7 @@ var getCityLatLon = function (cityName) {
                     var cityName = data[0].name
 
                     getWeather(lat, lon)
-                    addCityToList(cityName)
+                    compareList(cityName)
                 });
             } else {
                 console.log('dne');
@@ -101,6 +122,31 @@ var getWeather = function (lat, lon) {
         })
 }
 
+var compareList = function (cityName) {
+    var inList = [];
+
+    for (i = 0; i < cityList.length; i++) {
+
+        if (cityName === cityList[i]) {
+            console.log('already in list')
+            inList++
+            console.log(inList)
+        }
+
+    }
+
+    console.log(inList)
+    if (inList === 1) {
+        console.log(inList)
+    } else {
+        console.log('yes')
+        saveCity(cityName)
+        addCityToList(cityName)
+    }
+    
+}
+
+
 var saveCity = function (cityName) {
 
     cityList.push(cityName)
@@ -108,7 +154,10 @@ var saveCity = function (cityName) {
     window.localStorage.setItem('cityNameStored', cityName)
     window.localStorage.setItem('cityListStored', cityList)
 
+
 }
+
+
 
 // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
 var displayDailyWeather = function (data) {
@@ -123,8 +172,7 @@ var displayDailyWeather = function (data) {
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
-    var dailyDivEl = document.querySelector('.daily')
-
+    var h2El = document.createElement('h2')
     var h3El = document.createElement('h3');
     var olEl = document.createElement('ol');
     var tempEl = document.createElement('li');
@@ -139,12 +187,13 @@ var displayDailyWeather = function (data) {
     iconEl.setAttribute('alt', 'weather icon')
 
 
+    h2El.textContent = 'Today\'s Forecast'
     h3El.textContent = cityName + ' ' + day
     tempEl.textContent = tempF + ' F';
     humidityEl.textContent = humidity + '%';
     windEl.textContent = windSpeed + ' mps';
 
-
+    dailyDivEl.appendChild(h2El);
     dailyDivEl.appendChild(h3El);
     dailyDivEl.appendChild(iconEl);
     dailyDivEl.appendChild(olEl);
@@ -158,7 +207,9 @@ var displayDailyWeather = function (data) {
 var displayForecast = function (data) {
 
     console.log(data)
-
+    var h2El = document.createElement('h2')
+    h2El.textContent = '5 Day Forecast'
+    forecastDivEl.appendChild(h2El)
 
     for (i = 1; i < data.list.length; i = i + 8) {
 
@@ -171,8 +222,7 @@ var displayForecast = function (data) {
         var humidity = weather.humidity;
         var windSpeed = (data.list[i].wind.speed)
 
-        var forecastDivEl = document.querySelector('.forecast')
-
+        
         var h3El = document.createElement('h3');
         var olEl = document.createElement('ol');
         var tempEl = document.createElement('li');
@@ -186,11 +236,13 @@ var displayForecast = function (data) {
         iconEl.setAttribute('src', iconSrc)
         iconEl.setAttribute('alt', 'weather icon')
 
+        
         h3El.textContent = day
         tempEl.textContent = tempF + ' F';
         humidityEl.textContent = humidity + '%';
         windEl.textContent = windSpeed + ' mps';
 
+        
         forecastDivEl.appendChild(h3El);
         forecastDivEl.appendChild(iconEl);
         forecastDivEl.appendChild(olEl);
@@ -203,4 +255,7 @@ var displayForecast = function (data) {
 }
 
 
+
+
 searchButtonEl.addEventListener('click', formSubmitHandler);
+cityBtnEl.addEventListener('click', buttonClickHandler);
