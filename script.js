@@ -5,7 +5,6 @@
 // var apiUrl = 'http://api.openweathermap.org/'
 
 // current and future conditions for that city and that city is added to the search history
-console.log(document.location.search)
 
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
@@ -19,9 +18,7 @@ if ((localStorage.getItem('cityListStored') === null)) {
 } else {
     var cityList = window.localStorage.getItem('cityListStored');
     cityList = cityList.split(',')
-    console.log(cityList)
-    console.log(typeof cityList)
-    createCityListButtons()
+    createCityListButtons();
 }
 
 
@@ -51,8 +48,9 @@ var formSubmitHandler = function (event) {
     var city = searchInputEl.value
 
     if (city) {
+        console.log(city)
         getCityLatLon(city);
-        compareList(city);
+        // compareList(city);
     } else {
         console.log('enter city')
     }
@@ -64,20 +62,18 @@ var formSubmitHandler = function (event) {
 var buttonClickHandler = function (event) {
     var cityBtnName = event.target.textContent;
 
-    console.log(cityBtnName)
     getCityLatLon(cityBtnName)
 
   };
 
 var removeHTML = function () {
-console.log('remove')
 dailyDivEl.textContent = ''
 forecastDivEl.textContent = ''
 }
 
-var getCityLatLon = function (cityName) {
+var getCityLatLon = function (city) {
 
-    var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=a62c7d10877c661b208fffa0f58b2658';
+    var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
     removeHTML()
 
@@ -91,6 +87,7 @@ var getCityLatLon = function (cityName) {
                     var cityName = data[0].name
 
                     getWeather(lat, lon)
+                    console.log(cityName)
                     compareList(cityName)
                 });
             } else {
@@ -104,13 +101,12 @@ var getCityLatLon = function (cityName) {
 var getWeather = function (lat, lon) {
 
     var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
-    console.log(apiLatLon)
 
     fetch(apiLatLon)
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data);
+                    
                     displayDailyWeather(data);
                     displayForecast(data)
 
@@ -124,22 +120,23 @@ var getWeather = function (lat, lon) {
 
 var compareList = function (cityName) {
     var inList = [];
+    console.log(cityName)
 
     for (i = 0; i < cityList.length; i++) {
 
         if (cityName === cityList[i]) {
-            console.log('already in list')
+            
             inList++
-            console.log(inList)
+            
         }
 
     }
 
-    console.log(inList)
+    
     if (inList === 1) {
         console.log(inList)
     } else {
-        console.log('yes')
+        
         saveCity(cityName)
         addCityToList(cityName)
     }
