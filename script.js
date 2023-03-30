@@ -11,6 +11,9 @@ var searchButtonEl = document.querySelector('.search-button')
 var cityBtnEl = document.querySelector('#city-buttons')
 var dailyDivEl = document.querySelector('.daily')
 var forecastDivEl = document.querySelector('.forecast')
+var degSym = String.fromCharCode('176');
+console.log(degSym)
+
 
 
 if ((localStorage.getItem('cityListStored') === null)) {
@@ -188,9 +191,9 @@ var displayDailyWeather = function (data) {
 
     h2El.textContent = 'Today\'s Forecast'
     h3El.textContent = cityName + ' ' + day
-    tempEl.textContent = tempF + ' F';
-    humidityEl.textContent = humidity + '%';
-    windEl.textContent = windSpeed + ' mps';
+    tempEl.textContent = 'Temp ' + tempF + ' ' + degSym + 'F';
+    humidityEl.textContent = 'Humidity ' + humidity + '%';
+    windEl.textContent = 'Windspeed ' + windSpeed + ' mps';
 
     
 
@@ -246,9 +249,9 @@ var displayForecast = function (data) {
 
         
         h3El.textContent = day
-        tempEl.textContent = tempF + ' F';
-        humidityEl.textContent = humidity + '%';
-        windEl.textContent = windSpeed + ' mps';
+        tempEl.textContent = 'Temp ' + tempF + ' ' + degSym + 'F';
+        humidityEl.textContent = 'Humidity ' + humidity + '%';
+        windEl.textContent = 'Windspeed ' + windSpeed + ' mps';
 
         
         divMainEl.appendChild(divEl);
