@@ -9,7 +9,6 @@ console.log(document.location.search)
 
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
-// var listParentEl = document.querySelector('.list-parent')
 var cityBtnEl = document.querySelector('#city-buttons')
 
 
@@ -40,7 +39,7 @@ function addCityToList(cityName) {
     btnEl.textContent = cityName;
     btnEl.classList.add('button');
     cityBtnEl.appendChild(btnEl);
-    // var cityBtnEl = 
+    
 
 
 }
@@ -64,16 +63,11 @@ var formSubmitHandler = function (event) {
 
 
 var buttonClickHandler = function (event) {
-    var cityBtnEl = event.target.textContent;
+    var cityBtnName = event.target.textContent;
 
-    console.log(cityBtnEl)
-    console.log('yes')
-  
-    // if (language) {
-    //   getFeaturedRepos(language);
-  
-    //   repoContainerEl.textContent = '';
-    // }
+    console.log(cityBtnName)
+
+
   };
 
 
