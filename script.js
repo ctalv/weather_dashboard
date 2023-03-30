@@ -120,7 +120,7 @@ var displayDailyWeather = function (data) {
     var tempK = weather.temp
     var tempF = Math.round(((tempK-273.15)*(9/5))+32);
     var humidity = weather.humidity;
-    var windSpeed = Math.round((data.list[0].wind.speed)/60)
+    var windSpeed = (data.list[0].wind.speed)
 
     console.log(cityName)
     console.log(day)
@@ -142,6 +142,13 @@ var displayDailyWeather = function (data) {
     iconEl.classList.add('icon');
     var iEl = createElement('i');
     iEl.classList.add('fas fa-'+icon);
+
+
+    cityNameEl.textContent = cityName;
+    dateEl.textContent = day;
+    tempEl.textContent = tempF + ' F';
+    humidityEl.textContent = humidity + '%';
+    windEl.textContent = windSpeed + 'mps';
 
     dailyDivEl.appendChild(cityNameEl);
     dailyDivEl.appendChild(dateEl);
