@@ -11,9 +11,35 @@ var searchButtonEl = document.querySelector('.search-button')
 function citySearch() {
 
     searchButtonEl.addEventListener('click', function () {
+
+        var city = searchInputEl.value
         
-        console.log('worked')
+
+        if (city === '') {
+            console.log('nothing entered')
+            console.log(searchInputEl.textContent)
+
+        } else {
+
+            var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
+
+            console.log(apiZip)
+
+            fetch(apiZip)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+            console.log('worked')
+        }
     });
+
 }
 
 
