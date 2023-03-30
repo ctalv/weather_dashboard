@@ -122,39 +122,31 @@ var displayDailyWeather = function (data) {
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
-    console.log(cityName)
-    console.log(day)
-    // console.log(icon)
-    console.log(tempF)
-    console.log(humidity)
-    console.log(windSpeed)
 
     var dailyDivEl = document.querySelector('.daily')
 
-    // var cityNameEl = document.createElement('h2'); 
-    var h2El = document.createElement('h2')
-    // var dateEl = document.createElement('h3'); 
-    // var iconEl = document.createElement('span'); 
-    var olEl = document.createElement('ol')
+    var h2El = document.createElement('h2');
+    var olEl = document.createElement('ol');
     var tempEl = document.createElement('li'); 
     var humidityEl = document.createElement('li'); 
     var windEl = document.createElement('li')
     
-    // iconEl.classList.add('icon');
-    var iconPic = 'http://openweathermap.org/img/w/' + iconCode + '.png'
+    // icon stuff
+    var iconEl = document.createElement('img'); 
+    var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png'
+    iconEl.setAttribute('id','wicon')
+    iconEl.setAttribute('src',iconSrc)
+    iconEl.setAttribute('alt','weather icon')
 
-    // cityNameEl.textContent = cityName;
-    // dateEl.textContent = day;
-    // iconEl.value = iconPic;
-    h2El.textContent =  cityName + ' ' + day + ' ' + iconPic;
+
+    h2El.textContent =  cityName + ' ' + day 
     tempEl.textContent = tempF + ' F';
     humidityEl.textContent = humidity + '%';
     windEl.textContent = windSpeed + ' mps';
 
-    // dailyDivEl.appendChild(cityNameEl);
-    // dailyDivEl.appendChild(dateEl);
-    // dailyDivEl.appendChild(iconEl);
+    
     dailyDivEl.appendChild(h2El);
+    dailyDivEl.appendChild(iconEl);
     dailyDivEl.appendChild(olEl);
     olEl.appendChild(tempEl);
     olEl.appendChild(humidityEl);
