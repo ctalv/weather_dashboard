@@ -30,8 +30,11 @@ function createCityListButtons() {
         var btnEl = document.createElement('button');
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
+        btnEl.classList.add('is-medium');
+        
         cityBtnEl.appendChild(btnEl);
         btnEl.addEventListener('click', buttonClickHandler);
+        
 
     }
 }
@@ -40,8 +43,9 @@ function addCityToList(cityName) {
     var btnEl = document.createElement('button');
     btnEl.textContent = cityName;
     btnEl.classList.add('button');
+    btnEl.classList.add('is-medium');
     cityBtnEl.appendChild(btnEl);
-    
+
 }
 
 
@@ -67,18 +71,18 @@ var buttonClickHandler = function (event) {
 
     getCityLatLon(cityBtnName)
 
-  };
+};
 
 var removeHTML = function () {
-dailyDivEl.textContent = ''
-forecastDivEl.textContent = ''
+    dailyDivEl.textContent = ''
+    forecastDivEl.textContent = ''
 }
 
 var getCityLatLon = function (city) {
 
     var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
-    
+
     removeHTML()
 
     fetch(apiZip)
@@ -89,7 +93,7 @@ var getCityLatLon = function (city) {
                     var lat = data[0].lat
                     var lon = data[0].lon
                     var cityName = data[0].name
-                    
+
                     getWeather(lat, lon)
                     console.log(cityName)
                     compareList(cityName)
@@ -110,7 +114,7 @@ var getWeather = function (lat, lon) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    
+
                     displayDailyWeather(data);
                     displayForecast(data)
                     console.log(data)
@@ -135,14 +139,14 @@ var compareList = function (cityName) {
 
     }
 
-    
+
     if (inList === 1) {
         console.log(inList)
     } else {
         saveCity(cityName)
         addCityToList(cityName)
     }
-    
+
 }
 
 
@@ -186,10 +190,10 @@ var displayDailyWeather = function (data) {
     iconEl.setAttribute('src', iconSrc)
     iconEl.setAttribute('alt', 'weather icon')
 
-    olEl.setAttribute("style","list-style-type:none")
+    olEl.setAttribute("style", "list-style-type:none")
     divEl.setAttribute('class', 'content is-medium')
 
-    h2El.setAttribute('class','title is-2 hero')
+    h2El.setAttribute('class', 'title is-2 hero')
 
     h2El.textContent = 'Today\'s Forecast'
     h3El.textContent = cityName + ' ' + day
@@ -197,7 +201,7 @@ var displayDailyWeather = function (data) {
     humidityEl.textContent = 'Humidity ' + humidity + '%';
     windEl.textContent = 'Windspeed ' + windSpeed + ' mps';
 
-    
+
 
     dailyDivEl.appendChild(h2El);
     dailyDivEl.appendChild(divEl);
@@ -216,7 +220,7 @@ var displayForecast = function (data) {
     console.log(data)
     var h2El = document.createElement('h2')
     h2El.textContent = '5 Day Forecast'
-    h2El.setAttribute('class','title is-2 hero')
+    h2El.setAttribute('class', 'title is-2 hero')
     forecastDivEl.appendChild(h2El)
 
     var divMainEl = document.createElement('div')
@@ -248,14 +252,14 @@ var displayForecast = function (data) {
         iconEl.setAttribute('src', iconSrc)
         iconEl.setAttribute('alt', 'weather icon')
 
-        olEl.setAttribute("style","list-style-type:none")
-        
+        olEl.setAttribute("style", "list-style-type:none")
+
         h3El.textContent = day
         tempEl.textContent = 'Temp ' + tempF + ' ' + degSym + 'F';
         humidityEl.textContent = 'Humidity ' + humidity + '%';
         windEl.textContent = 'Windspeed ' + windSpeed + ' mps';
 
-        
+
         divMainEl.appendChild(divEl);
         divEl.appendChild(h3El);
         divEl.appendChild(iconEl);
@@ -272,13 +276,13 @@ var displayForecast = function (data) {
 
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
-searchInputEl.addEventListener("keypress", function(event) {
+searchInputEl.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault()
-console.log("enter")
-searchButtonEl.click();
-    
+        console.log("enter")
+        searchButtonEl.click();
+
 
     }
-  });
+});
 cityBtnEl.addEventListener('click', buttonClickHandler);
