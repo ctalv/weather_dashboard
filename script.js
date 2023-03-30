@@ -23,17 +23,20 @@ if ((localStorage.getItem('cityListStored') === null)) {
 
 function createCityListButtons () {
     for (i = 0; i < cityList.length; i++) {
-        var btnEl =  document.createElement('button')
-        btnEl.textContent = cityList[i]
-        listParentEl.appendChild(btnEl)
+        var btnEl =  document.createElement('button');
+        btnEl.textContent = cityList[i];
+        btnEl.classList.add('button');
+        listParentEl.appendChild(btnEl);
 
     }
 }
 
 function addCityToList (cityName) {
-    var btnEl =  document.createElement('button')
-    btnEl.textContent = cityName
-    listParentEl.appendChild(btnEl)
+    var btnEl =  document.createElement('button');
+    btnEl.textContent = cityName;
+    btnEl.classList.add('button');
+    listParentEl.appendChild(btnEl);
+    
 
 }
 

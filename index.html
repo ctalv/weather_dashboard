@@ -15,17 +15,17 @@
 
 <body>
     <header>
-        <h1>Weather Dashboard</h1>
+        <h1 class="title">Weather Dashboard</h1>
     </header>
-    <div>
-        <aside class="list-parent">
+    <div class="columns">
+        <div class="column is-one-fifth list-parent is-flex is-flex-direction-column">
             <input class="search-bar" type="search">
-            <button class="search-button">Search</button>
-        </aside>
-        <main>
+            <button class="button is-light is-responsive search-button">Search</button>
+        </div>
+        <div class="column">
             <div>Daily</div>
             <div>5-Day Forecast</div>
-        </main>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
