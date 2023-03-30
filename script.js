@@ -54,6 +54,24 @@ var getWeather = function (lat, lon) {
 
     var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
     console.log(apiLatLon)
+
+    fetch(apiLatLon)
+    .then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+                
+                var unixDay = data.list[0].dt
+                console.log(unixDay)
+                var day = dayjs.unix(unixDay).format('MMM D, YYYY');
+                console.log(day)
+
+            });
+        } else {
+            console.log('dne');
+        }
+
+    })
 }
 
 
