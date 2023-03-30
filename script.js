@@ -30,13 +30,16 @@ var getCityLatLon = function (cityName) {
 
     var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
-
-
     fetch(apiZip)
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
+                    var lat = data[0].lat
+                    var lon = data[0].lon
+                    var cityName = data[0].name
+                    
+                    getWeather(lat, lon)
                 });
             } else {
                 console.log('dne');
@@ -47,20 +50,11 @@ var getCityLatLon = function (cityName) {
 
 
 
-var getWeather = function () {
+var getWeather = function (lat, lon) {
+
     var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
     console.log(apiLatLon)
 }
 
-// fetch(apiUrl)
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//     console.log(data);
-//   })
-//   .catch(function (err) {
-//     console.log(err);
-//   });
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
