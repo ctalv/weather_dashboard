@@ -91,6 +91,7 @@ var getWeather = function (lat, lon) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayDailyWeather(data);
+                    displayForecast(data)
 
                 });
             } else {
@@ -122,7 +123,6 @@ var displayDailyWeather = function (data) {
     var humidity = weather.humidity;
     var windSpeed = (data.list[0].wind.speed)
 
-
     var dailyDivEl = document.querySelector('.daily')
 
     var h2El = document.createElement('h2');
@@ -153,5 +153,11 @@ var displayDailyWeather = function (data) {
     olEl.appendChild(windEl);
 
 }
+
+
+var displayForecast = function (data) {
+console.log("worked")
+}
+
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
