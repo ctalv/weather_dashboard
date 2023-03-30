@@ -10,6 +10,12 @@ console.log(document.location.search)
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
 
+if ((localStorage.getItem('cityList') === null)) {
+    var cityList = [];
+} else {
+    
+}
+
 
 var formSubmitHandler = function (event) {
 
@@ -78,7 +84,10 @@ var getWeather = function (lat, lon) {
 var saveCity = function (cityName) {
     console.log(cityName)
 
+    cityList.push(cityName)
+
     window.localStorage.setItem('cityNameStored', cityName)
+    window.localStorage.setItem('cityListStored', cityList)
 
 }
 
