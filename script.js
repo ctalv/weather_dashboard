@@ -110,10 +110,12 @@ var saveCity = function (cityName) {
 }
 
 var displayDailyWeather = function (data) {
+    console.log(data)
     var unixDay = data.list[0].dt
-    console.log(unixDay)
     var day = dayjs.unix(unixDay).format('MMM D, YYYY');
+    var cityName = data.city.name
     console.log(day)
+    console.log(cityName)
 
 }
 
