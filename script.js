@@ -10,10 +10,13 @@ console.log(document.location.search)
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
 
-if ((localStorage.getItem('cityList') === null)) {
+if ((localStorage.getItem('cityListStored') === null)) {
     var cityList = [];
 } else {
-    
+    var cityList = window.localStorage.getItem('cityListStored');
+    cityList = cityList.split(',')
+    console.log(cityList)
+    console.log(typeof cityList)
 }
 
 
@@ -87,7 +90,7 @@ var saveCity = function (cityName) {
     cityList.push(cityName)
 
     window.localStorage.setItem('cityNameStored', cityName)
-    window.localStorage.setItem('cityListStored', cityList)
+    window.localStorage.setItem('cityListStored', JSON.stringify(cityList))
 
 }
 
