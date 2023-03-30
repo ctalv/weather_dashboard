@@ -21,9 +21,9 @@ if ((localStorage.getItem('cityListStored') === null)) {
     createCityListButtons()
 }
 
-function createCityListButtons () {
+function createCityListButtons() {
     for (i = 0; i < cityList.length; i++) {
-        var btnEl =  document.createElement('button');
+        var btnEl = document.createElement('button');
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
         listParentEl.appendChild(btnEl);
@@ -31,12 +31,12 @@ function createCityListButtons () {
     }
 }
 
-function addCityToList (cityName) {
-    var btnEl =  document.createElement('button');
+function addCityToList(cityName) {
+    var btnEl = document.createElement('button');
     btnEl.textContent = cityName;
     btnEl.classList.add('button');
     listParentEl.appendChild(btnEl);
-    
+
 
 }
 
@@ -80,7 +80,6 @@ var getCityLatLon = function (cityName) {
 }
 
 
-
 var getWeather = function (lat, lon) {
 
     var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
@@ -91,11 +90,7 @@ var getWeather = function (lat, lon) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
-
-                    var unixDay = data.list[0].dt
-                    console.log(unixDay)
-                    var day = dayjs.unix(unixDay).format('MMM D, YYYY');
-                    console.log(day)
+                    displayDailyWeather(data);
 
                 });
             } else {
@@ -111,6 +106,59 @@ var saveCity = function (cityName) {
 
     window.localStorage.setItem('cityNameStored', cityName)
     window.localStorage.setItem('cityListStored', cityList)
+
+}
+
+// city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
+var displayDailyWeather = function (data) {
+    console.log(data)
+    var cityName = data.city.name
+    var unixDay = data.list[0].dt
+    var day = dayjs.unix(unixDay).format('MM-DD-YY');
+    var iconCode = data.list[0].weather[0].icon
+    var weather = data.list[0].main
+    var tempK = weather.temp
+    var tempF = Math.round(((tempK-273.15)*(9/5))+32);
+    var humidity = weather.humidity;
+    var windSpeed = (data.list[0].wind.speed)
+
+    console.log(cityName)
+    console.log(day)
+    // console.log(icon)
+    console.log(tempF)
+    console.log(humidity)
+    console.log(windSpeed)
+
+    var dailyDivEl = document.querySelector('.daily')
+
+    // var cityNameEl = document.createElement('h2'); 
+    var h2El = document.createElement('h2')
+    // var dateEl = document.createElement('h3'); 
+    // var iconEl = document.createElement('span'); 
+    var olEl = document.createElement('ol')
+    var tempEl = document.createElement('li'); 
+    var humidityEl = document.createElement('li'); 
+    var windEl = document.createElement('li')
+    
+    // iconEl.classList.add('icon');
+    var iconPic = 'http://openweathermap.org/img/w/' + iconCode + '.png'
+
+    // cityNameEl.textContent = cityName;
+    // dateEl.textContent = day;
+    // iconEl.value = iconPic;
+    h2El.textContent =  cityName + ' ' + day + ' ' + iconPic;
+    tempEl.textContent = tempF + ' F';
+    humidityEl.textContent = humidity + '%';
+    windEl.textContent = windSpeed + ' mps';
+
+    // dailyDivEl.appendChild(cityNameEl);
+    // dailyDivEl.appendChild(dateEl);
+    // dailyDivEl.appendChild(iconEl);
+    dailyDivEl.appendChild(h2El);
+    dailyDivEl.appendChild(olEl);
+    olEl.appendChild(tempEl);
+    olEl.appendChild(humidityEl);
+    olEl.appendChild(windEl);
 
 }
 
