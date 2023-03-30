@@ -77,7 +77,9 @@ var getWeather = function (lat, lon) {
 
 var saveCity = function (cityName) {
     console.log(cityName)
-    
+
+    window.localStorage.setItem('cityNameStored', cityName)
+
 }
 
 searchButtonEl.addEventListener('click', formSubmitHandler);
