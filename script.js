@@ -1,19 +1,9 @@
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-// Access Key: a62c7d10877c661b208fffa0f58b2658
-
-// var apiUrl = 'http://api.openweathermap.org/'
-
-// current and future conditions for that city and that city is added to the search history
-
 var searchInputEl = document.querySelector('.search-bar')
 var searchButtonEl = document.querySelector('.search-button')
 var cityBtnEl = document.querySelector('#city-buttons')
 var dailyDivEl = document.querySelector('.daily')
 var forecastDivEl = document.querySelector('.forecast')
 var degSym = String.fromCharCode('176');
-console.log(degSym)
-
 
 
 if ((localStorage.getItem('cityListStored') === null)) {
@@ -56,11 +46,9 @@ var formSubmitHandler = function (event) {
     searchInputEl.value = '';
 
     if (city) {
-        console.log(city)
         getCityLatLon(city);
-        // compareList(city);
     } else {
-        console.log('enter city')
+        alert('Enter a city.')
     }
 
 };
@@ -94,7 +82,7 @@ var getCityLatLon = function (city) {
                     var lon = data[0].lon;
                     var cityName = data[0].name;
 
-                    getWeather(lat, lon)
+                    getWeather(lat, lon, cityName)
                     console.log(cityName)
                     compareList(cityName)
                 });
@@ -106,7 +94,7 @@ var getCityLatLon = function (city) {
 }
 
 
-var getWeather = function (lat, lon) {
+var getWeather = function (lat, lon, city) {
 
     var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658'
 
@@ -115,7 +103,7 @@ var getWeather = function (lat, lon) {
             if (response.ok) {
                 response.json().then(function (data) {
 
-                    displayDailyWeather(data);
+                    displayDailyWeather(data, city);
                     displayForecast(data)
                     console.log(data)
 
@@ -136,7 +124,6 @@ var compareList = function (cityName) {
         if (cityName === cityList[i]) {
             inList++
         }
-
     }
 
 
@@ -162,9 +149,10 @@ var saveCity = function (cityName) {
 
 
 // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
-var displayDailyWeather = function (data) {
+var displayDailyWeather = function (data, city) {
 
-    var cityName = data.city.name
+    //
+    var cityName = city
     var unixDay = data.list[0].dt
     var day = dayjs.unix(unixDay).format('MM-DD-YY');
     var iconCode = data.list[0].weather[0].icon
