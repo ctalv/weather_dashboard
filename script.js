@@ -77,17 +77,17 @@ var getCityLatLon = function (city) {
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    console.log(data);
+                    
                     var lat = data[0].lat;
                     var lon = data[0].lon;
                     var cityName = data[0].name;
 
                     getWeather(lat, lon, cityName)
-                    console.log(cityName)
                     compareList(cityName)
                 });
             } else {
-                console.log('dne');
+
+                
             }
 
         })
@@ -105,11 +105,11 @@ var getWeather = function (lat, lon, city) {
 
                     displayDailyWeather(data, city);
                     displayForecast(data)
-                    console.log(data)
+                    
 
                 });
             } else {
-                console.log('dne');
+               
             }
 
         })
@@ -117,7 +117,7 @@ var getWeather = function (lat, lon, city) {
 
 var compareList = function (cityName) {
     var inList = [];
-    console.log(cityName)
+    
 
     for (i = 0; i < cityList.length; i++) {
 
@@ -128,7 +128,7 @@ var compareList = function (cityName) {
 
 
     if (inList === 1) {
-        console.log(inList)
+        
     } else {
         saveCity(cityName)
         addCityToList(cityName)
@@ -204,7 +204,7 @@ var displayDailyWeather = function (data, city) {
 //  5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 var displayForecast = function (data) {
 
-    console.log(data)
+    
     var h2El = document.createElement('h2')
     h2El.textContent = '5 Day Forecast'
     h2El.setAttribute('class', 'title is-2 hero')
@@ -265,7 +265,6 @@ searchButtonEl.addEventListener('click', formSubmitHandler);
 searchInputEl.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault()
-        console.log("enter")
         searchButtonEl.click();
     }
 });
