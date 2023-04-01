@@ -65,7 +65,7 @@ var removeHTML = function () {
 // pulls the latititude and longitude based on the user inputed city
 var getCityLatLon = function (city) {
 
-    var apiZip = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
+    var apiZip = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
     removeHTML();
 
@@ -95,7 +95,7 @@ var getCityLatLon = function (city) {
 // pulls the weather data based on the latitude and longitude pulled earlier
 var getWeather = function (lat, lon, city) {
 
-    var apiLatLon = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658';
+    var apiLatLon = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + lon + '&appid=a62c7d10877c661b208fffa0f58b2658';
 
     fetch(apiLatLon)
         .then(function (response) {
@@ -167,7 +167,7 @@ var displayDailyWeather = function (data, city) {
 
     // icon display
     var iconEl = document.createElement('img');
-    var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
+    var iconSrc = 'https://openweathermap.org/img/wn/' + iconCode + '@2x.png';
     iconEl.setAttribute('id', 'wicon');
     iconEl.setAttribute('src', iconSrc);
     iconEl.setAttribute('alt', 'weather icon');
@@ -229,7 +229,7 @@ var displayForecast = function (data) {
 
         // icon display
         var iconEl = document.createElement('img');
-        var iconSrc = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
+        var iconSrc = 'https://openweathermap.org/img/wn/' + iconCode + '@2x.png';
         iconEl.setAttribute('id', 'wicon');
         iconEl.setAttribute('src', iconSrc);
         iconEl.setAttribute('alt', 'weather icon');
