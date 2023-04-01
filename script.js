@@ -21,7 +21,6 @@ function createCityListButtons() {
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
         btnEl.classList.add('is-medium');
-
         cityBtnEl.appendChild(btnEl);
         btnEl.addEventListener('click', buttonClickHandler);
     }
