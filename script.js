@@ -205,7 +205,8 @@ var displayForecast = function (data) {
 
     var divMainEl = document.createElement('div');
     forecastDivEl.appendChild(divMainEl);
-    divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between content is-medium');
+    // divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between content is-medium');
+    divMainEl.setAttribute('class', 'columns is-1 content is-medium');
 
     // to pull each day needed
     for (i = 0; i < data.list.length; i = i + 8) {
@@ -233,6 +234,7 @@ var displayForecast = function (data) {
         iconEl.setAttribute('src', iconSrc);
         iconEl.setAttribute('alt', 'weather icon');
 
+        divEl.setAttribute('class', 'column');
         olEl.setAttribute("style", "list-style-type:none");
 
         h3El.textContent = day;
