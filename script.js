@@ -90,9 +90,9 @@ var getCityLatLon = function (city) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
-                    var lat = data[0].lat
-                    var lon = data[0].lon
-                    var cityName = data[0].name
+                    var lat = data[0].lat;
+                    var lon = data[0].lon;
+                    var cityName = data[0].name;
 
                     getWeather(lat, lon)
                     console.log(cityName)
@@ -156,7 +156,6 @@ var saveCity = function (cityName) {
 
     window.localStorage.setItem('cityNameStored', cityName)
     window.localStorage.setItem('cityListStored', cityList)
-
 
 }
 
@@ -227,7 +226,7 @@ var displayForecast = function (data) {
     forecastDivEl.appendChild(divMainEl)
     divMainEl.setAttribute('class', 'is-flex is-justify-content-space-between content is-medium')
 
-    for (i = 1; i < data.list.length; i = i + 8) {
+    for (i = 0; i < data.list.length; i = i + 8) {
 
         var unixDay = data.list[i].dt
         var day = dayjs.unix(unixDay).format('MM-DD-YY');
@@ -274,15 +273,12 @@ var displayForecast = function (data) {
 
 
 
-
 searchButtonEl.addEventListener('click', formSubmitHandler);
 searchInputEl.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault()
         console.log("enter")
         searchButtonEl.click();
-
-
     }
 });
 cityBtnEl.addEventListener('click', buttonClickHandler);
