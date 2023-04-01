@@ -21,10 +21,10 @@ function createCityListButtons() {
         btnEl.textContent = cityList[i];
         btnEl.classList.add('button');
         btnEl.classList.add('is-medium');
-        
+
         cityBtnEl.appendChild(btnEl);
         btnEl.addEventListener('click', buttonClickHandler);
-        
+
 
     }
 }
@@ -73,22 +73,44 @@ var getCityLatLon = function (city) {
 
     removeHTML()
 
-    fetch(apiZip)
+    // fetch(apiZip)
+    //     .then(function (response) {
+    //         if (response.ok) {
+    //             response.json().then(function (data) {
+
+    //                 var lat = data[0].lat;
+    //                 var lon = data[0].lon;
+    //                 var cityName = data[0].name;
+
+    //                 getWeather(lat, lon, cityName)
+    //                 compareList(cityName)
+    //             });
+    //         } else {
+
+
+    //         }
+
+    //     })
+
+        fetch(apiZip)
         .then(function (response) {
-            if (response.ok) {
+
+            if (response.status !== 200) {
+                alert('Please enter a valid city name.')
+
+            } else {
                 response.json().then(function (data) {
-                    
+
                     var lat = data[0].lat;
                     var lon = data[0].lon;
                     var cityName = data[0].name;
 
                     getWeather(lat, lon, cityName)
                     compareList(cityName)
-                });
-            } else {
 
-                
-            }
+                })
+            };
+
 
         })
 }
@@ -100,24 +122,25 @@ var getWeather = function (lat, lon, city) {
 
     fetch(apiLatLon)
         .then(function (response) {
-            if (response.ok) {
+            if (response.status !== 200) {
+                alert('Please enter a valid city name.')
+
+            } else {
                 response.json().then(function (data) {
 
                     displayDailyWeather(data, city);
                     displayForecast(data)
-                    
 
-                });
-            } else {
-               
-            }
+                })
+            };
+
 
         })
 }
 
 var compareList = function (cityName) {
     var inList = [];
-    
+
 
     for (i = 0; i < cityList.length; i++) {
 
@@ -128,7 +151,7 @@ var compareList = function (cityName) {
 
 
     if (inList === 1) {
-        
+
     } else {
         saveCity(cityName)
         addCityToList(cityName)
@@ -204,7 +227,7 @@ var displayDailyWeather = function (data, city) {
 //  5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 var displayForecast = function (data) {
 
-    
+
     var h2El = document.createElement('h2')
     h2El.textContent = '5 Day Forecast'
     h2El.setAttribute('class', 'title is-2 hero')
