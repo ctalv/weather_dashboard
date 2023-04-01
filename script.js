@@ -98,6 +98,8 @@ var getCityLatLon = function (city) {
             if (response.status !== 200) {
                 alert('Please enter a valid city name.')
 
+            } else if (response.status >= 500) {
+                alert('Sorry! Servers are down! Please try again later.')
             } else {
                 response.json().then(function (data) {
 
@@ -124,7 +126,8 @@ var getWeather = function (lat, lon, city) {
         .then(function (response) {
             if (response.status !== 200) {
                 alert('Please enter a valid city name.')
-
+            } else if (response.status >= 500) {
+                alert('Sorry! Servers are down! Please try again later.')
             } else {
                 response.json().then(function (data) {
 
